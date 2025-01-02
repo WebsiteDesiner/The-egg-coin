@@ -27,6 +27,7 @@
     text-transform: uppercase;
     letter-spacing: 2px;
     font-weight: bold;
+    white-space: nowrap;
 }
 
 .counter::before {
@@ -80,6 +81,33 @@
         inset -15px -15px 40px rgba(0,0,0,0.05),
         inset 15px 15px 40px rgba(255,255,255,0.9);
     transform-origin: center bottom;
+    animation: eggPulse 2s ease-in-out infinite;
+}
+
+.egg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: inherit;
+    background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* 添加裂纹效果 */
+.egg::after {
+    content: '';
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: transparent;
+    opacity: 0;
+    transition: all 0.5s ease;
 }
 
 .egg:hover {
@@ -93,12 +121,8 @@
 .egg.chick {
     height: 280px;
     border-radius: 50%;
-    background: yellow;
+    background: #FFE779;
     animation: hatchChick 0.5s ease-out;
-    box-shadow: 
-        0 15px 30px rgba(0,0,0,0.15),
-        inset -10px -10px 30px rgba(0,0,0,0.1),
-        inset 10px 10px 30px rgba(255,255,255,0.4);
     position: relative;
     overflow: hidden;
 }
@@ -111,6 +135,95 @@
     transform: translate(-50%, -50%);
     font-size: 160px;
     animation: chickAppear 0.3s ease-out;
+}
+
+/* 幼年小鸡 */
+.egg.chicken-kid {
+    height: 280px;
+    border-radius: 50%;
+    background: #FFD54F;
+    animation: hatchChick 0.5s ease-out;
+}
+
+.egg.chicken-kid::after {
+    content: '🐤';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 160px;
+    animation: chickAppear 0.3s ease-out;
+}
+
+/* 青年小鸡 */
+.egg.chicken-teen {
+    height: 280px;
+    border-radius: 50%;
+    background: #FFC107;
+    animation: hatchChick 0.5s ease-out;
+}
+
+.egg.chicken-teen::after {
+    content: '🐔';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 160px;
+    animation: chickAppear 0.3s ease-out;
+}
+
+/* 成年小鸡 */
+.egg.chicken-final {
+    height: 280px;
+    border-radius: 50%;
+    background: #FFB300;
+    animation: hatchChick 0.5s ease-out;
+}
+
+.egg.chicken-final::after {
+    content: '🦃';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 160px;
+    animation: chickAppear 0.3s ease-out;
+}
+
+/* 添加进化时的特效 */
+@keyframes evolve {
+    0% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.2) rotate(180deg);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(1) rotate(360deg);
+        opacity: 1;
+    }
+}
+
+/* 确保响应式设计也适用于所有进化阶段 */
+@media (max-width: 768px) {
+    .egg.chick::after,
+    .egg.chicken-kid::after,
+    .egg.chicken-teen::after,
+    .egg.chicken-final::after {
+        font-size: 120px;
+    }
+}
+
+@media (max-width: 480px) {
+    .egg.chick::after,
+    .egg.chicken-kid::after,
+    .egg.chicken-teen::after,
+    .egg.chicken-final::after {
+        font-size: 100px;
+    }
 }
 
 /* 平板设备的响应式设计 */
@@ -496,4 +609,468 @@
 
 #contract-address:hover::after {
     opacity: 1;
+} 
+
+/* 更新社交媒体链接在手机端的样式 */
+@media (max-width: 768px) {
+    .social-links {
+        gap: 15px;
+        flex-wrap: wrap;  /* 允许图标换行 */
+        justify-content: center;
+        margin-top: 30px;
+    }
+    
+    .social-link {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+/* 更新合约地址在手机端的样式 */
+@media (max-width: 768px) {
+    .contract-address {
+        font-size: 14px;
+        padding: 8px 12px;
+        max-width: 90vw;  /* 限制最大宽度 */
+        overflow-x: auto; /* 允许横向滚动 */
+        white-space: nowrap;
+    }
+    
+    #contract-address::after {
+        font-size: 10px;
+        bottom: -20px;
+    }
+}
+
+/* 更新超小屏幕的样式 */
+@media (max-width: 320px) {
+    .container {
+        padding: 15px 10px;
+    }
+    
+    .social-links {
+        gap: 10px;
+    }
+    
+    .social-link {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .contract-address {
+        font-size: 12px;
+        padding: 6px 10px;
+    }
+}
+
+/* 添加横屏模式的优化 */
+@media (max-height: 600px) and (orientation: landscape) {
+    .container {
+        padding: 10px;
+    }
+    
+    .title {
+        font-size: 36px;
+        margin-bottom: 20px;
+    }
+    
+    .counter {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+    
+    .egg {
+        width: 140px;
+        height: 200px;
+    }
+    
+    .social-links {
+        margin-top: 20px;
+    }
+    
+    .contract-address {
+        margin-top: 20px;
+    }
+}
+
+/* 优化触摸设备的交互 */
+@media (hover: none) {
+    .social-link:active {
+        transform: translateY(-3px);
+    }
+    
+    #contract-address:active {
+        transform: scale(0.95);
+    }
+} 
+
+/* 添加市值等级提示 */
+.counter::after {
+    content: attr(data-level);
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 14px;
+    color: #666;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 4px 12px;
+    border-radius: 20px;
+    white-space: nowrap;
+} 
+
+/* 添加市值更新时的动画效果 */
+@keyframes updateFlash {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.update-flash {
+    animation: updateFlash 0.5s ease-out;
+}
+
+/* 更新市值等级显示的样式 */
+.counter::after {
+    content: attr(data-level);
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 14px;
+    color: #666;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 4px 12px;
+    border-radius: 20px;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+}
+
+.counter[data-level="LEGENDARY"]::after {
+    color: #FFD700;
+    background: rgba(0, 0, 0, 0.8);
+    text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+}
+
+.counter[data-level="RARE"]::after {
+    color: #C0C0C0;
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.counter[data-level="UNCOMMON"]::after {
+    color: #CD7F32;
+    background: rgba(0, 0, 0, 0.8);
+} 
+
+/* 不同阶段的蛋的颜色 */
+.egg.stage-1 {
+    background: linear-gradient(145deg, #FFE4B5 0%, #FFD700 50%, #FFA500 100%);
+    animation: eggPulse 2s ease-in-out infinite, colorShift1 4s linear infinite;
+}
+
+.egg.stage-2 {
+    background: linear-gradient(145deg, #E6E6FA 0%, #9370DB 50%, #663399 100%);
+    animation: eggPulse 2s ease-in-out infinite, colorShift2 4s linear infinite;
+}
+
+.egg.stage-3 {
+    background: linear-gradient(145deg, #98FB98 0%, #3CB371 50%, #2E8B57 100%);
+    animation: eggPulse 2s ease-in-out infinite, colorShift3 4s linear infinite;
+}
+
+.egg.stage-4 {
+    background: linear-gradient(145deg, #87CEEB 0%, #4169E1 50%, #0000CD 100%);
+    animation: eggPulse 2s ease-in-out infinite, colorShift4 4s linear infinite;
+}
+
+.egg.stage-5 {
+    background: linear-gradient(145deg, #FFB6C1 0%, #FF69B4 50%, #FF1493 100%);
+    animation: eggPulse 2s ease-in-out infinite, colorShift5 4s linear infinite;
+}
+
+.egg.phoenix-egg {
+    background: linear-gradient(145deg, #FF6B6B 0%, #FF4500 50%, #8B0000 100%);
+    animation: eggPulse 2s ease-in-out infinite, phoenixEggPulse 3s linear infinite;
+    box-shadow: 
+        0 0 30px #FF4500,
+        inset 0 0 20px rgba(255,69,0,0.5);
+}
+
+/* 基础脉动动画 */
+@keyframes eggPulse {
+    0%, 100% {
+        transform: scale(1) rotate(0deg);
+    }
+    50% {
+        transform: scale(1.05) rotate(1deg);
+    }
+}
+
+/* 闪光效果 */
+@keyframes eggShine {
+    0% {
+        transform: translateX(-100%) rotate(45deg);
+    }
+    100% {
+        transform: translateX(100%) rotate(45deg);
+    }
+}
+
+/* 各阶段的颜色变换动画 */
+@keyframes colorShift1 {
+    0%, 100% { filter: hue-rotate(0deg) brightness(1); }
+    50% { filter: hue-rotate(30deg) brightness(1.2); }
+}
+
+@keyframes colorShift2 {
+    0%, 100% { filter: hue-rotate(0deg) brightness(1); }
+    50% { filter: hue-rotate(-30deg) brightness(1.2); }
+}
+
+@keyframes colorShift3 {
+    0%, 100% { filter: hue-rotate(0deg) brightness(1); }
+    50% { filter: hue-rotate(45deg) brightness(1.3); }
+}
+
+@keyframes colorShift4 {
+    0%, 100% { filter: hue-rotate(0deg) brightness(1); }
+    50% { filter: hue-rotate(-45deg) brightness(1.3); }
+}
+
+@keyframes colorShift5 {
+    0%, 100% { filter: hue-rotate(0deg) brightness(1); }
+    50% { filter: hue-rotate(60deg) brightness(1.4); }
+}
+
+/* 凤凰蛋特效 */
+@keyframes phoenixEggPulse {
+    0% {
+        box-shadow: 0 0 30px #FF4500;
+        filter: hue-rotate(0deg) brightness(1);
+    }
+    50% {
+        box-shadow: 0 0 50px #FF4500;
+        filter: hue-rotate(180deg) brightness(1.5);
+    }
+    100% {
+        box-shadow: 0 0 30px #FF4500;
+        filter: hue-rotate(360deg) brightness(1);
+    }
+}
+
+/* 破壳动画 */
+@keyframes crackFormation {
+    0% {
+        clip-path: polygon(50% 50%, 50% 50%, 50% 50%);
+        opacity: 0;
+    }
+    100% {
+        clip-path: polygon(20% 0%, 80% 0%, 50% 100%);
+        opacity: 1;
+    }
+}
+
+/* 进化时的破壳效果 */
+.egg.evolving::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255,255,255,0.8);
+    clip-path: polygon(50% 50%, 50% 50%, 50% 50%);
+    animation: crackFormation 1s ease-out forwards;
+}
+
+/* 项目描述样式 */
+.description {
+    text-align: center;
+    margin-bottom: 40px;
+    color: #333;
+    max-width: 800px;
+    padding: 0 20px;
+}
+
+.description p {
+    font-size: 24px;
+    margin-bottom: 15px;
+    background: linear-gradient(45deg, #2193b0, #6dd5ed);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: bold;
+}
+
+.description .sub-text {
+    font-size: 18px;
+    color: #666;
+    line-height: 1.6;
+    -webkit-text-fill-color: #666;
+    background: none;
+}
+
+/* 羽毛容器 */
+.feathers-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+    overflow: hidden;
+}
+
+/* 羽毛样式 */
+.feather {
+    position: fixed;
+    width: 20px;
+    height: 40px;
+    background: none;
+    pointer-events: none;
+    top: -40px;
+}
+
+.feather::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    height: 100%;
+    width: 1px;
+    background: white;
+    transform: translateX(-50%);
+}
+
+.feather::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    background: 
+        linear-gradient(90deg, transparent 20%, white 20%, white 22%, transparent 22%, transparent 78%, white 78%, white 80%, transparent 80%),
+        linear-gradient(45deg, transparent 45%, white 45%, white 47%, transparent 47%) repeat-y,
+        linear-gradient(-45deg, transparent 45%, white 45%, white 47%, transparent 47%) repeat-y;
+    background-size: 100% 100%, 4px 4px, 4px 4px;
+    filter: drop-shadow(0 0 1px rgba(255,255,255,0.3));
+    opacity: 0.7;
+}
+
+@keyframes featherFall {
+    0% {
+        transform: translateY(0) rotate(0deg) translateX(0);
+    }
+    25% {
+        transform: translateY(25vh) rotate(90deg) translateX(20px);
+    }
+    50% {
+        transform: translateY(50vh) rotate(180deg) translateX(0);
+    }
+    75% {
+        transform: translateY(75vh) rotate(270deg) translateX(-20px);
+    }
+    100% {
+        transform: translateY(120vh) rotate(360deg) translateX(0);
+    }
+}
+
+@keyframes featherSwing {
+    0%, 100% {
+        transform: rotate(-15deg);
+    }
+    50% {
+        transform: rotate(15deg);
+    }
+}
+
+.feather.white {
+    filter: brightness(1.5) invert(1);
+}
+
+.feather.black {
+    filter: brightness(0);
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .description p {
+        font-size: 20px;
+    }
+    
+    .description .sub-text {
+        font-size: 16px;
+    }
+} 
+
+/* 不同市值等级的破壳效果 */
+.egg.crack-1::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: inherit;
+    background: linear-gradient(45deg, transparent 45%, rgba(255,255,255,0.3) 46%, transparent 47%) repeat,
+                linear-gradient(-45deg, transparent 45%, rgba(255,255,255,0.3) 46%, transparent 47%) repeat;
+    background-size: 30px 30px;
+    opacity: 0;
+    animation: crackAppear 1s ease-out forwards;
+}
+
+.egg.crack-2::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: inherit;
+    background: 
+        linear-gradient(45deg, transparent 40%, rgba(255,255,255,0.4) 41%, transparent 42%) repeat,
+        linear-gradient(-45deg, transparent 40%, rgba(255,255,255,0.4) 41%, transparent 42%) repeat,
+        linear-gradient(90deg, transparent 40%, rgba(255,255,255,0.4) 41%, transparent 42%) repeat;
+    background-size: 20px 20px;
+    opacity: 0;
+    animation: crackAppear 1s ease-out forwards;
+}
+
+.egg.crack-3::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: inherit;
+    background: 
+        linear-gradient(45deg, transparent 35%, rgba(255,255,255,0.5) 36%, transparent 37%) repeat,
+        linear-gradient(-45deg, transparent 35%, rgba(255,255,255,0.5) 36%, transparent 37%) repeat,
+        linear-gradient(90deg, transparent 35%, rgba(255,255,255,0.5) 36%, transparent 37%) repeat,
+        linear-gradient(180deg, transparent 35%, rgba(255,255,255,0.5) 36%, transparent 37%) repeat;
+    background-size: 15px 15px;
+    opacity: 0;
+    animation: crackAppear 1s ease-out forwards;
+}
+
+@keyframes crackAppear {
+    0% {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
 } 
